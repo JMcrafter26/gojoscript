@@ -32,7 +32,7 @@ sum = x + y;         // Addition: 30
 diff = x - y;        // Subtraction: -10
 product = x * y;     // Multiplication: 200
 quotient = y / x;    // Division: 2
-floor_div = y // x;  // Floor division: 2
+floor_div = y div x;  // Floor division: 2
 remainder = y % x;   // Modulo: 0
 text = "Hello" & " World"; // String concatenation: "Hello World"
 
@@ -52,9 +52,9 @@ greater_equal = x >= y; // Greater than or equal to
 less_equal = x <= y;    // Less than or equal to
 
 // Logical operators
-both = x > 0 and y > 0;  // Logical AND
-either = x > 0 or y < 0; // Logical OR
-inverse = not x > 0;     // Logical NOT
+both = x > 0 && y > 0;  // Logical AND
+either = x > 0 || y < 0; // Logical OR
+inverse = !(x > 0);     // Logical NOT
 ```
 
 ### Control Flow
@@ -75,10 +75,10 @@ if x % 2 == 0 {
     say "x is odd";
 }
 
-// If-elif-else statement
+// If-else if-else statement
 if x < 0 {
     say "x is negative";
-} elif x == 0 {
+} else if x == 0 {
     say "x is zero";
 } else {
     say "x is positive";
@@ -105,9 +105,9 @@ repeat 10 {
     i++;
 }
 
-// Until loop (continues until condition is true)
+// While loop (continues while condition is true)
 counter = 0;
-until counter > 5 {
+while (counter <= 5) {
     say "Counter: " & counter;
     counter++;
 }
@@ -144,9 +144,9 @@ function calculate_sum(a, b) {
 
 onflag() {
     // Call procedures
-    greet_user;
-    personalized_greeting "John";
-    calculate_sum 5, 10;
+    greet_user();
+    personalized_greeting("John");
+    calculate_sum(5, 10);
 }
 ```
 

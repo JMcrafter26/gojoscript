@@ -17,10 +17,10 @@ numeric_value = string_variable + "";
 
 ### Simulating "Wait Until"
 
-Use an `until` loop with an empty body:
+Use a `while` loop with an empty body:
 
 ```goboscript
-until (condition) {}
+while (!condition) {}
 ```
 
 ### Encapsulating Variables
@@ -50,13 +50,11 @@ onflag() {
 }
 ```
 
-### "While" Loop Macro
+### While Loop
 
-Goboscript has no `while` loop, but you can macro it:
+Goboscript has a `while` loop that compiles to a Scratch "repeat until" block with the condition negated:
 
 ```goboscript
-%define while(CONDITION) until (not (CONDITION))
-
 onflag() {
     i = 0;
     while (i < 10) {

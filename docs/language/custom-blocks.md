@@ -48,8 +48,8 @@ function greet(name = "world") {
 }
 ```
 
-* `greet` → says "Hello, world!"
-* `greet "aspizu"` → says "Hello, aspizu!"
+* `greet()` → says "Hello, world!"
+* `greet("aspizu")` → says "Hello, aspizu!"
 
 ---
 
@@ -68,6 +68,11 @@ function introduce(name, title = "developer", location = "unknown") {
 Call it using keyword arguments:
 
 ```goboscript
+// Parenthesized (recommended)
+introduce(name: "aspizu", location: "India");
+// Output: "aspizu is a developer from India"
+
+// Legacy style
 introduce name: "aspizu", location: "India";
 // Output: "aspizu is a developer from India"
 ```
@@ -76,7 +81,7 @@ Keyword arguments can be **used in any order**, as long as required arguments ar
 provided:
 
 ```goboscript
-introduce location: "Berlin", name: "Kai";
+introduce(location: "Berlin", name: "Kai");
 // Output: "Kai is a developer from Berlin"
 ```
 
@@ -84,10 +89,13 @@ introduce location: "Berlin", name: "Kai";
 
 ## Calling Custom Blocks
 
-Call a procedure using positional or keyword arguments:
+Call a procedure using parenthesized syntax (recommended) or legacy positional/keyword style:
 
 ```goboscript
-// Positional
+// Parenthesized (recommended)
+my_procedure("hello", 3);
+
+// Positional (legacy)
 my_procedure "hello", 3;
 
 // Keyword

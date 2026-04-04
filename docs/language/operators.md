@@ -4,7 +4,7 @@
 
 | Operator | Implementation |
 |----------|----------------|
-| `not x == true` | ![](../assets/not.png){width="125"} |
+| `!x` | ![](../assets/not.png){width="125"} |
 | `length x` | ![](../assets/length.png){width="125"} |
 | `round x` | ![](../assets/round.png){width="125"} |
 | `abs x` | ![](../assets/abs.png){width="125"} |
@@ -30,7 +30,7 @@
 | `x - y` | ![](../assets/subtract.png){width="125"} |
 | `x * y` | ![](../assets/multiply.png){width="125"} |
 | `x / y` | ![](../assets/divide.png){width="125"} |
-| `x // y` | ![](../assets/floor_divide.png){width="200"} |
+| `x div y` | ![](../assets/floor_divide.png){width="200"} |
 | `x % y` | ![](../assets/mod.png){width="125"} |
 | `x & y` | ![](../assets/join.png){width="125"} |
 | `x == y` | ![](../assets/eq.png){width="125"} |
@@ -39,10 +39,9 @@
 | `x <= y` | ![](../assets/leq.png){width="125"} |
 | `x > y` | ![](../assets/gt.png){width="125"} |
 | `x >= y` | ![](../assets/geq.png){width="125"} |
-| `x == true and y == true`| ![](../assets/and.png){width="400"} |
-| `x == true or y == true`| ![](../assets/or.png){width="400"} |
+| `x == true && y == true`| ![](../assets/and.png){width="400"} |
+| `x == true \|\| y == true`| ![](../assets/or.png){width="400"} |
 | `x in y` | ![](../assets/in.png){width="125"} |
-| `x not in y` | ![](../assets/notin.png){width="125"} |
 | `x[y]` | ![](../assets/letterof.png){width="125"} |
 
 ## Reporters

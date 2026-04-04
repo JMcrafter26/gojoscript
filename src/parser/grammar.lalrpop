@@ -328,6 +328,21 @@ Stmt: Stmt = {
         let name = Name::DotName { lhs, lhs_span: l..r, rhs, rhs_span: fl..fr, is_generated: false };
         Stmt::augmented_index_assign(BinOp::Join, name, index, value)
     },
+    <l:@L> <name:NAME> <r:@R> "(" ")" ";" => {
+        match Block::from_shape(&name, 0) {
+            Some(block) => Stmt::Block { block, span: l..r, args: vec![], kwargs: Default::default() },
+            None => Stmt::ProcCall { name, span: l..r, args: vec![], kwargs: Default::default() },
+        }
+    },
+    <l:@L> <name:NAME> <r:@R> "(" <first:Kwarg> "," <rest:Kwargs> ")" ";" => {
+        let mut all = vec![first];
+        all.extend(rest);
+        let (args, kwargs) = split_args(all);
+        match Block::from_shape(&name, args.len()) {
+            Some(block) => Stmt::Block { block, span: l..r, args, kwargs },
+            None => Stmt::ProcCall { name, span: l..r, args, kwargs },
+        }
+    },
     <l:@L> <name:NAME> <r:@R> <args:Kwargs> ";" => {
         let (args, kwargs) = split_args(args);
         match Block::from_shape(&name, args.len()) {

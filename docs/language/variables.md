@@ -64,7 +64,7 @@ In the compiled Scratch project, the variable `x` will be named as `my_procedure
 | `x -= y;`  | ![](../assets/assign_subtract.png){width="150"}      |
 | `x *= y;`  | ![](../assets/assign_multiply.png){width="150"}      |
 | `x /= y;`  | ![](../assets/assign_divide.png){width="150"}        |
-| `x //= y;` | ![](../assets/assign_floor_divide.png){width="150"}  |
+| `x div= y;` | ![](../assets/assign_floor_divide.png){width="150"}  |
 | `x %= y;`  | ![](../assets/assign_mod.png){width="150"}           |
 | `x &= y;`  | ![](../assets/assign_join.png){width="150"}          |
 

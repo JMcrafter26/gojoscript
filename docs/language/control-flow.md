@@ -10,10 +10,10 @@ repeat n {
 
 ![](../assets/repeat.png){width="100"}
 
-## repeat until condition
+## while loop (repeat until)
 
 ```goboscript
-until condition == true {
+while (condition) {
     // code
 }
 ```
@@ -53,13 +53,13 @@ else {
 
 ![](../assets/ifelse.png){width="200"}
 
-## if elif
+## if else if
 
 ```goboscript
 if condition {
     // code
 }
-elif condition {
+else if condition {
     // code
 }
 ```
