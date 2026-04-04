@@ -5,21 +5,21 @@ functions, they do **not return values**.
 
 ## Declaring a Custom Block
 
-Use the `proc` keyword to define a custom block. List argument names separated by 
+Use the `function` keyword to define a custom block. List argument names separated by 
 commas.
 
 ```goboscript
-proc my_procedure arg1, arg2 {
+function my_procedure(arg1, arg2) {
     say $arg1;
     say $arg2;
 }
 ```
 
-Use the `nowarp` keyword before `proc` to make the custom block
+Use the `nowarp` keyword before `function` to make the custom block
 *run without screen refresh* **unchecked**.
 
 ```goboscript
-nowarp proc my_procedure arg1, arg2 {
+nowarp function my_procedure(arg1, arg2) {
     say $arg1;
     say $arg2;
 }
@@ -30,7 +30,7 @@ nowarp proc my_procedure arg1, arg2 {
 You can take in struct values by specifying the type name before the argument name.
 
 ```goboscript
-proc process_item Item item_data {
+function process_item(Item item_data) {
     say $item_data.name;
 }
 ```
@@ -43,7 +43,7 @@ Just like functions, **procedures support default argument values**. This allows
 caller to skip certain arguments when calling the block.
 
 ```goboscript
-proc greet name = "world" {
+function greet(name = "world") {
     say "Hello, " & $name & "!";
 }
 ```
@@ -60,7 +60,7 @@ name. This improves readability, especially when not all parameters are passed o
 calling with many arguments.
 
 ```goboscript
-proc introduce name, title = "developer", location = "unknown" {
+function introduce(name, title = "developer", location = "unknown") {
     say $name & " is a " & $title & " from " & $location;
 }
 ```
@@ -69,7 +69,7 @@ Call it using keyword arguments:
 
 ```goboscript
 introduce name: "aspizu", location: "India";
-# Output: "aspizu is a developer from India"
+// Output: "aspizu is a developer from India"
 ```
 
 Keyword arguments can be **used in any order**, as long as required arguments are 
@@ -77,7 +77,7 @@ provided:
 
 ```goboscript
 introduce location: "Berlin", name: "Kai";
-# Output: "Kai is a developer from Berlin"
+// Output: "Kai is a developer from Berlin"
 ```
 
 ---
@@ -87,10 +87,10 @@ introduce location: "Berlin", name: "Kai";
 Call a procedure using positional or keyword arguments:
 
 ```goboscript
-# Positional
+// Positional
 my_procedure "hello", 3;
 
-# Keyword
+// Keyword
 my_procedure arg2: 3, arg1: "hello";
 ```
 

@@ -6,19 +6,19 @@ The same rules apply for lists as for variables regarding **for all sprites** an
 ## Declaration
 
 ```goboscript
-list list_name; # initialized to empty list.
+list list_name; // initialized to empty list.
 ```
 
 ### With default values
 
 ```goboscript
-list list_name = [1, 2, 3]; # initialized with some default values.
+list list_name = [1, 2, 3]; // initialized with some default values.
 ```
 
 ```goboscript
 struct point {x, y}
-list point points; # empty list of points.
-list point points = [100, 200, 300, 400]; # points[1] == point {x: 100, y: 200} and so on...
+list point points; // empty list of points.
+list point points = [100, 200, 300, 400]; // points[1] == point {x: 100, y: 200} and so on...
 ```
 
 ### Read contents from a text file

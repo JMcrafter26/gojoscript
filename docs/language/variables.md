@@ -7,9 +7,9 @@ There are two ways to declare a variable:
 ### 1. Declare using a top-level `var` statement.
 
 ```goboscript
-var variable_name = 10; # variable is 10 when project first loads
-var type_name variable_name; # initialized to struct defaults or zeros
-var type_name variable_name = type_name { ... }; # explicit default values
+var variable_name = 10; // variable is 10 when project first loads
+var type_name variable_name; // initialized to struct defaults or zeros
+var type_name variable_name = type_name { ... }; // explicit default values
 ```
 
 ### 2. Declare by assigning a value to the variable.
@@ -37,13 +37,13 @@ variable **for all sprites**, assign to it in `stage.gs`.
 
 Local variables are accessible only within the procedure they are declared in.
 
-The first assignment with the `local` keyword will declare a local variable, all further
+The first assignment with the `let` keyword will declare a local variable, all further
 uses of the variable will refer to the local variable. If a normal variable with the same
 name exists, it will be shadowed.
 
 ```goboscript
-proc my_procedure {
-    local x = 0;
+function my_procedure() {
+    let x = 0;
     x = x + 1;
 }
 ```

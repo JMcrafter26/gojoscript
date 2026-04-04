@@ -11,17 +11,17 @@ a function is undefined behavior.
 
 ## Declaring a Function
 
-Use the `func` keyword to define a function. Optionally, include a return type for 
+Use the `function` keyword to define a function. Optionally, include a return type for 
 functions that return a struct.
 
 ```goboscript
-func my_function(x, y) {
+function my_function(x, y) {
     return $x + $y;
 }
 ```
 
 ```goboscript
-func my_function(x, y) MyStruct {
+function my_function(x, y): MyStruct {
     return MyStruct { ... };
 }
 ```
@@ -40,7 +40,7 @@ struct Vector {
     y
 }
 
-func vec_add(Vector lhs, Vector rhs) Vector {
+function vec_add(Vector lhs, Vector rhs): Vector {
     return Vector {
         x: $lhs.x + $rhs.x,
         y: $lhs.y + $rhs.y
@@ -51,16 +51,16 @@ func vec_add(Vector lhs, Vector rhs) Vector {
 ### Using the Returned Struct
 
 ```goboscript
-# Create vectors
+// Create vectors
 Vector vec1 = Vector { x: 10, y: 20 };
 Vector vec2 = Vector { x: 5, y: 15 };
 
-# Call function that returns a struct
+// Call function that returns a struct
 Vector result = vec_add(vec1, vec2);
 
-# Access the returned struct's fields
-say result.x; # Outputs: 15
-say result.y; # Outputs: 35
+// Access the returned struct's fields
+say result.x; // Outputs: 15
+say result.y; // Outputs: 35
 ```
 
 !!!NOTE
@@ -73,7 +73,7 @@ say result.y; # Outputs: 35
 Function parameters can have **default values**, allowing callers to omit them:
 
 ```goboscript
-func greet(name = "world") {
+function greet(name = "world") {
     return "Hello, " & $name & "!";
 }
 ```
@@ -107,7 +107,7 @@ This behaves the same as `greet("aspizu")`, but makes the call more readable—e
 when multiple parameters are involved:
 
 ```goboscript
-func introduce(name, title = "developer", location = "unknown") {
+function introduce(name, title = "developer", location = "unknown") {
     return $name & " is a " & $title & " from " & $location;
 }
 ```
@@ -116,7 +116,7 @@ Call it with keyword arguments:
 
 ```goboscript
 introduce(name: "aspizu", location: "India")
-# Equivalent to: introduce("aspizu", "developer", "India")
+// Equivalent to: introduce("aspizu", "developer", "India")
 ```
 
 !!!NOTE 
@@ -125,5 +125,5 @@ introduce(name: "aspizu", location: "India")
 
     ```goboscript
     introduce(location: "Berlin", name: "Kai");
-    # Still valid
+    // Still valid
     ```

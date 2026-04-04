@@ -60,7 +60,7 @@ Given that these are placed at the beginning of the costumes list, you can get t
 ASCII value of a character by adding `31` to the costume number.
 
 ```goboscript
-func ord(c) {
+function ord(c) {
     switch_costume $c;
     return 31+costume_number();
 }
@@ -69,7 +69,7 @@ func ord(c) {
 You can convert a byte to a character by subtracting 31, then switching costumes.
 
 ```goboscript
-func chr(c) {
+function chr(c) {
     switch_costume $c-31;
     return costume_name();
 }

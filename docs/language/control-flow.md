@@ -4,7 +4,7 @@
 
 ```goboscript
 repeat n {
-    # code
+    // code
 }
 ```
 
@@ -14,7 +14,7 @@ repeat n {
 
 ```goboscript
 until condition == true {
-    # code
+    // code
 }
 ```
 
@@ -24,7 +24,7 @@ until condition == true {
 
 ```goboscript
 forever {
-    # code
+    // code
 }
 ```
 
@@ -34,7 +34,7 @@ forever {
 
 ```goboscript
 if condition {
-    # code
+    // code
 }
 ```
 
@@ -44,10 +44,10 @@ if condition {
 
 ```goboscript
 if condition {
-    # code
+    // code
 }
 else {
-    # code
+    // code
 }
 ```
 
@@ -57,10 +57,10 @@ else {
 
 ```goboscript
 if condition {
-    # code
+    // code
 }
 elif condition {
-    # code
+    // code
 }
 ```
 

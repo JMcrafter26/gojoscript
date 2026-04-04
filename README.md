@@ -23,8 +23,11 @@ goboscript is a text-based programming language that compiles to Scratch. Write
 Scratch projects in text, and compile it into a `.sb3` file -- which can be opened
 in the Scratch editor, TurboWarp or be uploaded to the Scratch website.
 
-goboscript makes developing advanced Scratch projects FAST. goboscript syntax is
-concise and easy to read. Use a version-control system such as git. Use VS Code
+> [!NOTE]
+> This is like the original compiler, but now with JavaScript syntax, just because I like JS syntax more than C
+>
+> For the syntax and features, see the [**Language Reference**](https://aspiz.uk/goboscript/docs/reference.html) in the documentation.
+
 or your favourite text-editor. Share code by copy-pasting. Use the standard library.
 Refactor code using search and replace. Write scripts in other programming languages
 to generate goboscript code. goboscript allows you to integrate external tooling and
@@ -39,11 +42,9 @@ abstractions such as:
 
   - Custom data-types using Structs and Enums.
   - Functions that return values
-  - Default parameters for Functions & Procedures
-  - Operators such as: `!=`, `>=`, `<=`, `//` (Floor division), `not in`
-  - Local variables (Function-scoped)
-  - and more...
-
+  - Default parameters for Functions
+  - Operators such as: `!=`, `>=`, `<=`, `//` (Floor division), `not in`        
+  - `let` variables (Function-scoped)
 All these abstractions are compiled down to regular Scratch code.
 
 <picture>

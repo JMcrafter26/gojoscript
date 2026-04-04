@@ -3,8 +3,8 @@
 ## When Green Flag Clicked
 
 ```goboscript
-onflag {
-    # code
+onflag() {
+    // code
 }
 ```
 
@@ -15,8 +15,8 @@ when green flag clicked
 ## When Key Pressed
 
 ```goboscript
-onkey "up arrow" {
-   # code 
+onkey("up arrow") {
+   // code 
 }
 ```
 
@@ -27,8 +27,8 @@ when [up arrow v] key pressed
 ## When This Sprite Clicked
 
 ```goboscript
-onclick {
-    # code
+onclick() {
+    // code
 }
 ```
 
@@ -39,8 +39,8 @@ when this sprite clicked
 ## When Backdrop Switches To
 
 ```goboscript
-onbackdrop "backdrop" {
-    # code
+onbackdrop("backdrop") {
+    // code
 }
 ```
 
@@ -51,8 +51,8 @@ when backdrop switches to [backdrop v]
 ## When Loudness >
 
 ```goboscript
-onloudness > 100 {
-    # code
+onloudness() > 100 {
+    // code
 }
 ```
 
@@ -63,8 +63,8 @@ when [loudness v] > (100)
 ## When Timer >
 
 ```goboscript
-ontimer > 100 {
-    # code
+ontimer() > 100 {
+    // code
 }
 ```
 
@@ -75,8 +75,8 @@ when [timer v] > (100)
 ## When I Start As A Clone
 
 ```goboscript
-onclone {
-    # code
+onclone() {
+    // code
 }
 ```
 
@@ -87,8 +87,8 @@ when I start as a clone
 ## When I Receive Message
 
 ```goboscript
-on "message name" {
-    # code
+on("message name") {
+    // code
 }
 ```
 

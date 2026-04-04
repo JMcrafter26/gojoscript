@@ -30,7 +30,7 @@ file relative to the current file, use `./` or `../`
     Python script that lets you include files from the internet using `%include` directives.
 
     ```goboscript
-    # run `./bkpk.py` to compile your project, instead of `goboscript build`
+    // run `./bkpk.py` to compile your project, instead of `goboscript build`
     %include https://github.com/username/repo/branchname/filename.gs
     ```
 
@@ -76,9 +76,9 @@ arguments passed at the callsite.
 %define MACRO(A) "MACRO(A)"
 %define MACRO(A, B) "MACRO(A, B)"
 
-onflag {
-    say MACRO(1);      # expands to "MACRO(A)"
-    say MACRO(1, 1);   # expands to "MACRO(A, B)"
+onflag() {
+    say MACRO(1);      // expands to "MACRO(A)"
+    say MACRO(1, 1);   // expands to "MACRO(A, B)"
 }
 ```
 
@@ -109,5 +109,5 @@ all overloads for that name at once.
 ## Concatenate Tokens
 
 ```goboscript
-CONCAT(prefix, suffix) # becomes prefixsuffix
+CONCAT(prefix, suffix) // becomes prefixsuffix
 ```

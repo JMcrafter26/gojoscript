@@ -22,7 +22,7 @@ struct my_struct {
 }
 
 my_struct v = my_struct {};
-# -> v.field == "default_value"
+// -> v.field == "default_value"
 ```
 
 ## Usage
@@ -78,11 +78,11 @@ You can pass structs to procedures via arguments or variables.
 ```goboscript
 list my_struct my_list;
 
-proc my_procedure my_struct arg {
-    # code
+function my_procedure(my_struct arg) {
+    // code
 }
 
-onflag {
+onflag() {
     my_procedure my_struct {
         x: 10,
         y: 20,
@@ -93,7 +93,7 @@ onflag {
 ```
 
 ```goboscript
-onflag {
+onflag() {
     my_struct foo = my_struct {
         x: 10,
         y: 20,
@@ -116,7 +116,7 @@ For example:
 ```goboscript
 pair = Pair { left: 100, right: 200 };
 pair = Pair { left: pair.left + 100, right: pair.left };
-# Result: pair = Pair { left: 200, right: 200 };
+// Result: pair = Pair { left: 200, right: 200 };
 ```
 
 In this case, the `pair.left` field is assigned first with the value 200, and 

@@ -32,7 +32,7 @@ Use `%define` to alias a long unique name to a short local one, then `%undef` it
 ```goboscript
 %define private_variable __my_module__private_variable
 
-func get_my_variable() {
+function get_my_variable() {
     return private_variable;
 }
 
@@ -44,9 +44,9 @@ func get_my_variable() {
 ```goboscript
 %include lib/my_module
 
-onflag {
+onflag() {
     say get_my_variable();
-    # private_variable = 10; # error — alias no longer defined
+    // private_variable = 10; # error — alias no longer defined
 }
 ```
 
@@ -57,7 +57,7 @@ Goboscript has no `while` loop, but you can macro it:
 ```goboscript
 %define while(CONDITION) until (not (CONDITION))
 
-onflag {
+onflag() {
     i = 0;
     while (i < 10) {
         i++;
