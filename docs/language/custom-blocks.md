@@ -30,7 +30,7 @@ nowarp function my_procedure(arg1, arg2) {
 You can take in struct values by specifying the type name before the argument name.
 
 ```goboscript
-function process_item(Item item_data) {
+function process_item(item_data: Item) {
     say $item_data.name;
 }
 ```

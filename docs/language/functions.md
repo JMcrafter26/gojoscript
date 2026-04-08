@@ -40,7 +40,7 @@ struct Vector {
     y
 }
 
-function vec_add(Vector lhs, Vector rhs): Vector {
+function vec_add(lhs: Vector, rhs: Vector): Vector {
     return Vector {
         x: $lhs.x + $rhs.x,
         y: $lhs.y + $rhs.y
@@ -52,11 +52,11 @@ function vec_add(Vector lhs, Vector rhs): Vector {
 
 ```goboscript
 // Create vectors
-Vector vec1 = Vector { x: 10, y: 20 };
-Vector vec2 = Vector { x: 5, y: 15 };
+let vec1: Vector = Vector { x: 10, y: 20 };
+let vec2: Vector = Vector { x: 5, y: 15 };
 
 // Call function that returns a struct
-Vector result = vec_add(vec1, vec2);
+let result: Vector = vec_add(vec1, vec2);
 
 // Access the returned struct's fields
 say result.x; // Outputs: 15

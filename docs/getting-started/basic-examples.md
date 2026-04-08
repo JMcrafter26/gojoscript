@@ -224,7 +224,7 @@ struct Point {
 }
 
 // Create a struct instance
-Point p = Point { x: 10, y: 20 };
+let p: Point = Point { x: 10, y: 20 };
 
 // Access struct fields
 say "Coordinates: " & p.x & ", " & p.y;

@@ -8,8 +8,8 @@ There are two ways to declare a variable:
 
 ```goboscript
 var variable_name = 10; // variable is 10 when project first loads
-var type_name variable_name; // initialized to struct defaults or zeros
-var type_name variable_name = type_name { ... }; // explicit default values
+var variable_name: type_name;
+var variable_name: type_name = type_name { ... }; // explicit default values
 ```
 
 ### 2. Declare by assigning a value to the variable.
@@ -21,7 +21,7 @@ variable_name = value;
 ```
 
 ```goboscript
-type_name variable_name = value;
+let variable_name: type_name = value;
 ```
 
 ### Variables for all sprites

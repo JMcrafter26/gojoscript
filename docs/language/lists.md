@@ -17,8 +17,8 @@ list list_name = [1, 2, 3]; // initialized with some default values.
 
 ```goboscript
 struct point {x, y}
-list point points; // empty list of points.
-list point points = [100, 200, 300, 400]; // points[1] == point {x: 100, y: 200} and so on...
+list points: point;
+list points: point = [100, 200, 300, 400]; // points[1] == point {x: 100, y: 200} and so on...
 ```
 
 ### Read contents from a text file
@@ -27,7 +27,7 @@ This allows you to load a text file line-by-line into a list of strings.
 
 ```goboscript
 list list_name "filepath.txt";
-list type_name list_name "filepath.txt";
+list list_name: type_name "filepath.txt";
 ```
 
 If type is specified, each list item is made-up by N lines where N is the no. of fields in type.

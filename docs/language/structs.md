@@ -21,7 +21,7 @@ struct my_struct {
     field = "default_value"
 }
 
-my_struct v = my_struct {};
+let v: my_struct = my_struct {};
 // -> v.field == "default_value"
 ```
 
@@ -30,13 +30,13 @@ my_struct v = my_struct {};
 ### Declaring a struct variable
 
 ```goboscript
-my_struct my_variable = value;
+let my_variable: my_struct = value;
 ```
 
 ### Declaring a struct list
 
 ```goboscript
-list my_struct my_list;
+list my_list: my_struct;
 ```
 
 ## Accessing struct fields
@@ -64,7 +64,7 @@ my_list[index].my_field
 Struct literals are a way to create structs.
 
 ```goboscript
-my_struct my_variable = my_struct {
+let my_variable: my_struct = my_struct {
     x: 10,
     y: 20,
     z: 30
@@ -76,9 +76,9 @@ my_struct my_variable = my_struct {
 You can pass structs to procedures via arguments or variables.
 
 ```goboscript
-list my_struct my_list;
+list my_list: my_struct;
 
-function my_procedure(my_struct arg) {
+function my_procedure(arg: my_struct) {
     // code
 }
 
@@ -94,12 +94,12 @@ onflag() {
 
 ```goboscript
 onflag() {
-    my_struct foo = my_struct {
+    let foo: my_struct = my_struct {
         x: 10,
         y: 20,
         z: 30
     };
-    my_struct bar = foo;
+    let bar: my_struct = foo;
 }
 ```
 

@@ -1,5 +1,5 @@
 costumes "assets/blank.svg";
 
-onflag {
+onflag() {
     say "Hello, World!";
 }
