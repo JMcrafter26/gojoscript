@@ -1,6 +1,6 @@
 <h1 align="center">
   <img src="docs/assets/goboscript.svg">
-  goboscript
+  goboscript JS
 </h1>
 
 <p align="center">
