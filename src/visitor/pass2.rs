@@ -426,6 +426,7 @@ fn visit_expr(expr: &mut Expr, s: S, d: D) {
     transformations::apply(expr, transformations::join_empty_right);
     transformations::apply(expr, transformations::bin_op);
     transformations::apply(expr, transformations::un_op);
+    transformations::apply(expr, transformations::not_not);
     transformations::apply(expr, |expr| transformations::variable_field_access(expr, s));
     transformations::apply(expr, |expr| transformations::arg_field_access(expr, s));
     transformations::apply(expr, |expr| transformations::list_field_access(expr, s));

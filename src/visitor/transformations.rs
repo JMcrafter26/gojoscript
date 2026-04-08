@@ -186,6 +186,26 @@ pub fn bin_op(expr: &Expr) -> Option<Expr> {
     Some(Value::bin_op(*op, lhs_value, rhs_value).to_expr(span.clone()))
 }
 
+pub fn not_not(expr: &Expr) -> Option<Expr> {
+    let Expr::UnOp {
+        op: UnOp::Not,
+        opr,
+        ..
+    } = expr
+    else {
+        return None;
+    };
+    let Expr::UnOp {
+        op: UnOp::Not,
+        opr: inner_opr,
+        ..
+    } = opr.as_ref()
+    else {
+        return None;
+    };
+    Some(*inner_opr.clone())
+}
+
 pub fn un_op(expr: &Expr) -> Option<Expr> {
     let Expr::UnOp { op, span, opr } = expr else {
         return None;
