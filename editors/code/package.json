@@ -1,22 +1,23 @@
 {
-  "name": "goboscript",
-  "displayName": "goboscript",
-  "version": "1.0.2",
-  "description": "goboscript language support for Visual Studio Code.",
-  "publisher": "aspizu",
+  "name": "goboscript-js",
+  "displayName": "GoboScript JS",
+  "version": "1.1.3",
+  "description": "GoboScript JS language support for Visual Studio Code.",
+  "publisher": "cufiy",
   "author": {
-    "name": "Priyanshu Dangare",
-    "email": "hello@aspiz.uk",
-    "url": "https://aspiz.uk"
+    "name": "Cufiy",
+    "email": "compel-speech-wasp@duck.com",
+    "url": "https://github.com/JMcrafter26"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aspizu/goboscript.git"
+    "url": "https://github.com/JMcrafter26/goboscript-js.git"
   },
-  "homepage": "https://github.com/aspizu/goboscript",
+  "homepage": "https://github.com/JMcrafter26/goboscript-js",
   "license": "MIT",
   "keywords": [
-    "goboscript"
+    "goboscript",
+    "goboscript-js"
   ],
   "icon": "icon.png",
   "categories": [
@@ -28,7 +29,7 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run build-base -- --minify",
-    "package": "vsce package -o goboscript.vsix",
+    "package": "vsce package -o goboscript-js.vsix",
     "build-base": "(npx js-yaml snippets/snippets.yml > snippets/snippets.json) && (npx js-yaml syntaxes/goboscript.tmGrammar.yml > syntaxes/goboscript.tmGrammar.json) && esbuild ./src/main.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node --target=node16",
     "build": "npm run build-base -- --sourcemap",
     "watch": "npm run build-base -- --sourcemap --watch",

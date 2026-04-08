@@ -11,3 +11,7 @@ dist/
 target/
 .cache/
 AGENTS.md
+
+.agents/
+.claude/
+skills-lock.json
