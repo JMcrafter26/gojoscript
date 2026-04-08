@@ -26,7 +26,7 @@ in the Scratch editor, TurboWarp or be uploaded to the Scratch website.
 > [!NOTE]
 > This is like the original compiler, but now with JavaScript syntax, just because I like JS syntax more than C
 >
-> For the syntax and features, see the [**Language Reference**](https://aspiz.uk/goboscript/docs/reference.html) in the documentation.
+> For the syntax and features, see the [**Language Reference**](./docs/language/) in the documentation.
 
 or your favourite text-editor. Share code by copy-pasting. Use the standard library.
 Refactor code using search and replace. Write scripts in other programming languages

@@ -64,28 +64,28 @@ condition = true;
 x = 10;
 
 // Simple if statement
-if x > 5 {
+if (x > 5) {
     say("x is greater than 5");
 }
 
 // If-else statement
-if x % 2 == 0 {
+if (x % 2 == 0) {
     say("x is even");
 } else {
     say("x is odd");
 }
 
 // If-else if-else statement
-if x < 0 {
+if (x < 0) {
     say("x is negative");
-} else if x == 0 {
+} else if ((x == 0)) {
     say("x is zero");
 } else {
     say("x is positive");
 }
 
 // Boolean coercion
-if timer() {  // Equivalent to: if timer() == 1
+if (timer()) {  // Equivalent to: if timer() == 1
     say("Timer is active");
 }
 ```
@@ -94,20 +94,20 @@ if timer() {  // Equivalent to: if timer() == 1
 
 ```goboscript
 // Repeat loop (fixed number of iterations)
-repeat 5 {
+repeat (5) {
     say("Repeated message");
 }
 
 // Repeat with counter
 i = 1;
-repeat 10 {
+repeat (10) {
     say("Iteration " & i);
     i++;
 }
 
 // While loop (continues while condition is true)
 counter = 0;
-while (counter <= 5) {
+while ((counter <= 5)) {
     say("Counter: " & counter);
     counter++;
 }
@@ -115,7 +115,7 @@ while (counter <= 5) {
 // Forever loop (infinite loop)
 forever {
     say("Press stop(to exit"));
-    if key space pressed? {
+    if (key space pressed?) {
         stop_this_script;
     }
 }
@@ -200,7 +200,7 @@ delete(my_list[3]);
 size = length my_list;
 
 // Check if an item is in the list
-if "cherry" in my_list {
+if ("cherry" in my_list) {
     say("Found cherry!");
 }
 
@@ -239,7 +239,7 @@ enum Direction {
 
 // Use enum values
 current_direction = Direction.North;
-if current_direction == Direction.North {
+if (current_direction == Direction.North) {
     say "Heading north";
 }
 

@@ -5,9 +5,9 @@ list input = file ```input.txt```;
 function count_xmas() {
     count_xmas = 0;
     let i = 1;
-    repeat length(input) {
+    repeat (length(input)) {
         let j = 1;
-        repeat length(input[1]) {
+        repeat (length(input[1])) {
             count_xmas += (
                     input[i][j    ] == "X"
                 && input[i][j + 1] == "M"
@@ -65,9 +65,9 @@ function count_xmas() {
 function count_x_mas() {
     count_x_mas = 0;
     let i = 1;
-    repeat length(input) {
+    repeat (length(input)) {
         let j = 1;
-        repeat length(input[1]) {
+        repeat (length(input[1])) {
             let a = input[i    ][j    ];
             let b = input[i    ][j + 2];
             let c = input[i + 2][j    ];

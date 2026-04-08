@@ -26,7 +26,7 @@ function parse_input() {
     delete list1;
     delete list2;
     let i = 1;
-    repeat length(input) {
+    repeat (length(input)) {
         split_once(input[i], sep: " ");
         add split_once_left to list1;
         add split_once_right to list2;
@@ -65,7 +65,7 @@ function sort_list2() {
 function count_list2(value) {
     count_list2 = 0;
     let i = 1;
-    repeat length(list2) {
+    repeat (length(list2)) {
         if (list2[i] == $value) {
             count_list2 += 1;
         }
@@ -76,7 +76,7 @@ function count_list2(value) {
 function get_total_distance() {
     total_distance = 0;
     let i = 1;
-    repeat length(list1) {
+    repeat (length(list1)) {
         total_distance += abs(list1[i] - list2[i]);
         i++;
     }
@@ -85,7 +85,7 @@ function get_total_distance() {
 function get_similarity_score() {
     similarity_score = 0;
     let i = 1;
-    repeat length(list1) {
+    repeat (length(list1)) {
         count_list2(list1[i]);
         similarity_score += list1[i] * count_list2;
         i++;

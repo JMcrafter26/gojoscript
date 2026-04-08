@@ -3,12 +3,12 @@ costumes "blank.svg";
 onflag() {
     foo = 1;
     wait(1);
-    repeat foo {
-        while (!(1 < 2)) {}
+    repeat (foo) {
+        while ((!(1 < 2))) {}
     }
-    if (1 < 2) {
+    if ((1 < 2)) {
         clone foo;
-    } else if (1 >= 2) {
+    } else if (((1 >= 2))) {
         stop_this_script;
     } else {
         clone "friend";

@@ -3,7 +3,7 @@
 ## repeat n times
 
 ```goboscript
-repeat n {
+repeat (n) {
     // code
 }
 ```
@@ -13,7 +13,7 @@ repeat n {
 ## while loop (repeat until)
 
 ```goboscript
-while (condition) {
+while ((condition)) {
     // code
 }
 ```
@@ -33,7 +33,7 @@ forever {
 ## if
 
 ```goboscript
-if condition {
+if (condition) {
     // code
 }
 ```
@@ -43,7 +43,7 @@ if condition {
 ## if else
 
 ```goboscript
-if condition {
+if (condition) {
     // code
 }
 else {
@@ -56,10 +56,10 @@ else {
 ## if else if
 
 ```goboscript
-if condition {
+if (condition) {
     // code
 }
-else if condition {
+else if ((condition)) {
     // code
 }
 ```

@@ -20,7 +20,7 @@ numeric_value = string_variable + "";
 Use a `while` loop with an empty body:
 
 ```goboscript
-while (!condition) {}
+while ((!condition)) {}
 ```
 
 ### Encapsulating Variables
@@ -57,7 +57,7 @@ Goboscript has a `while` loop that compiles to a Scratch "repeat until" block wi
 ```goboscript
 onflag() {
     i = 0;
-    while (i < 10) {
+    while ((i < 10)) {
         i++;
     }
 }

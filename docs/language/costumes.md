@@ -49,7 +49,7 @@ position 2, you can use the following code to detect the case of a character:
 
 ```goboscript
 switch_costume(char);
-if costume_number() == 1 {
+if (costume_number() == 1) {
     say("upper case A");
 } else {
     say("lower case a");

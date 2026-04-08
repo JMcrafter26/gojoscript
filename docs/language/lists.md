@@ -85,7 +85,7 @@ len = length list_name;
 ### Check if item is in list
 
 ```goboscript
-if value in list_name {
+if (value in list_name) {
     ...
 }
 ```

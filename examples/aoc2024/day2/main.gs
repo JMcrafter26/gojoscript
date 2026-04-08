@@ -8,7 +8,7 @@ function split(string, sep) {
     delete split;
     let part = "";
     let i = 1;
-    repeat length($string) {
+    repeat (length($string)) {
         if ($string[i] == $sep) {
             add part to split;
             part = "";
@@ -25,11 +25,11 @@ function split(string, sep) {
 function parse_input() {
     delete reports;
     let i = 1;
-    repeat length(input) {
+    repeat (length(input)) {
         split(input[i], sep: " ");
         add length(split) to reports;
         let j = 1;
-        repeat length(split) {
+        repeat (length(split)) {
             add split[j] to reports;
             j++;
         }
@@ -64,7 +64,7 @@ function is_report_safe(idx, skip_idx) {
 
 function is_report_safe_with_problem_dampener(idx) {
     let i = 1;
-    repeat reports[$idx] {
+    repeat (reports[$idx]) {
         is_report_safe($idx, i);
         if (is_report_safe == true) {
             stop_this_script;

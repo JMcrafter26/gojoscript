@@ -9,7 +9,7 @@ list strsplitchar;
 function strfindchar(string, char) {
     strfindchar = 0;
     let i = 1;
-    repeat length($string) {
+    repeat (length($string)) {
         if ($string[i] == $char) {
             strfindchar = i;
         }
@@ -21,7 +21,7 @@ function strsplitchar(string, char) {
     delete strsplitchar;
     let part = "";
     let i = 1;
-    repeat length($string) {
+    repeat (length($string)) {
         if ($string[i] == $char) {
             add part to strsplitchar;
             part = "";
@@ -39,7 +39,7 @@ function parse_input() {
     delete rules;
     delete pages;
     let i = 1;
-    repeat length(input) {
+    repeat (length(input)) {
         strfindchar(input[i], char: "|");
         if (strfindchar > 0) {
             strsplitchar(input[i], "|");
@@ -50,7 +50,7 @@ function parse_input() {
                 strsplitchar(input[i], char: ",");
                 add length(strsplitchar) to pages;
                 let j = 1;
-                repeat length(strsplitchar) {
+                repeat (length(strsplitchar)) {
                     add strsplitchar[j] to pages;
                     j++;
                 }
@@ -63,7 +63,7 @@ function parse_input() {
 function page_find_idx(page_ptr, value) {
     page_find_idx = 0;
     let i = $page_ptr + 1;
-    repeat pages[$page_ptr] {
+    repeat (pages[$page_ptr]) {
         if (pages[i] == $value) {
             page_find_idx = i - $page_ptr;
             stop_this_script;
@@ -85,7 +85,7 @@ function rule_in_page(rule: Rule, page_ptr) {
 
 function rules_in_page(page_ptr) {
     let i = 1;
-    repeat length(rules) {
+    repeat (length(rules)) {
         rule_in_page(rules[i], $page_ptr);
         if (rule_in_page == false) {
             stop_this_script;

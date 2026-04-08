@@ -5,7 +5,7 @@ list input = file ```input.txt```;
 function strsetchar(string, index, char) {
     strsetchar = "";
     let i = 1;
-    repeat length($string) {
+    repeat (length($string)) {
         if (i == $index) {
             strsetchar &= $char;
         } else {
@@ -18,7 +18,7 @@ function strsetchar(string, index, char) {
 function strfindchar(string, char) {
     strfindchar = 0;
     let i = 1;
-    repeat length($string) {
+    repeat (length($string)) {
         if ($string[i] == $char) {
             strfindchar = i;
         }
@@ -48,9 +48,9 @@ function run() {
 function count_x() {
     count_x = 1;
     let i = 1;
-    repeat length(input) {
+    repeat (length(input)) {
         let j = 1;
-        repeat length(input[1]) {
+        repeat (length(input[1])) {
             if (input[i][j] == "X") {
                 count_x++;
             }
@@ -62,9 +62,9 @@ function count_x() {
 
 function find_guard() {
     let i = 1;
-    repeat length(input) {
+    repeat (length(input)) {
         let j = 1;
-        repeat length(input[1]) {
+        repeat (length(input[1])) {
             if (input[i][j] == "^") {
                 x = j;
                 y = i;

@@ -5,7 +5,7 @@ list input = file ```input.txt```;
 function join_input() {
     join_input = "";
     let i = 1;
-    repeat length(input) {
+    repeat (length(input)) {
         join_input &= input[i];
         i++;
     }

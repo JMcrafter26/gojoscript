@@ -42,7 +42,7 @@ exception of **item # of list** and **item of list**). goboscript will automatic
 coerce non-boolean blocks into conditions by wrapping them in a comparison with `1`.
 
 ```goboscript
-if timer() {
+if (timer()) {
     ...
 }
 ```
@@ -50,7 +50,7 @@ if timer() {
 is equivalent to
 
 ```goboscript
-if timer() == 1 {
+if (timer() == 1) {
     ...
 }
 ```

@@ -41,12 +41,12 @@ onflag() {
         azf.x = 0-230;
         azf.y = 170;
         render();
-        if key_pressed("up arrow") {
+        if (key_pressed("up arrow")) {
             scroll += 1;
         }
-        if key_pressed("down arrow") {
+        if (key_pressed("down arrow")) {
             scroll -= 1;
-            if scroll < 0 {
+            if (scroll < 0) {
                 scroll = 0;
             }
         }
@@ -56,11 +56,11 @@ onflag() {
 function render() {
     erase_all;
     i = scroll;
-    repeat 340 div (azf_font[2] + azf.dy) {
+    repeat (340 div (azf_font[2] + azf.dy)) {
         azf_draw_string(self[i], 0-230);
         azf.y += azf.sy * (azf_font[2] + azf.dy);
         i += 1;
-        if i > length(self) {
+        if (i > length(self)) {
             stop_this_script;
         }
     }
@@ -69,10 +69,10 @@ function render() {
 function azf_draw_string(string, x) {
     azf.x = $x;
     let i = 1;
-    repeat length($string) {
+    repeat (length($string)) {
         azf_draw_char($string[i]);
         azf.x += azf.sx * (azf_font[1] + azf.dx);
-        if azf.x >= azf.x2 {
+        if (azf.x >= azf.x2) {
             azf.x = $x;
             azf.y += azf.sy * (azf_font[2] + azf.dy);
         }
