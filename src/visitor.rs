@@ -4,3 +4,4 @@ pub mod pass2;
 pub mod pass3;
 pub mod pass4;
 mod transformations;
+pub mod pass5;

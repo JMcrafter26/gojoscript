@@ -334,6 +334,8 @@ where T: Write + Seek
     pub block_count: usize,
     pub asset_object_store: AssetObjectStore,
     pub obfuscate: bool,
+    pub experimental: bool,
+    pub numbers: bool,
     garbled_vars: FxHashMap<String, String>,
     garbler_count: usize,
 }
@@ -353,7 +355,14 @@ where T: Write + Seek
 impl<T> Sb3<T>
 where T: Write + Seek
 {
-    pub fn new(file: T, fs: Rc<RefCell<dyn VFS>>, input: PathBuf, obfuscate: bool) -> Self {
+    pub fn new(
+        file: T,
+        fs: Rc<RefCell<dyn VFS>>,
+        input: PathBuf,
+        obfuscate: bool,
+        experimental: bool,
+        numbers: bool,
+    ) -> Self {
         Self {
             zip: ZipWriter::new(file),
             id: NodeIDFactory::new(),
@@ -362,6 +371,8 @@ where T: Write + Seek
             block_count: 0,
             asset_object_store: AssetObjectStore::new(input, fs),
             obfuscate,
+            experimental,
+            numbers,
             garbled_vars: Default::default(),
             garbler_count: 0,
         }

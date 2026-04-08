@@ -34,5 +34,9 @@ pub struct Config {
     #[serde(default)]
     pub obfuscate: Option<bool>,
     #[serde(default)]
+    pub experimental: Option<bool>,
+    #[serde(default)]
+    pub numbers: Option<bool>,
+    #[serde(default)]
     pub debug: Option<bool>,
 }

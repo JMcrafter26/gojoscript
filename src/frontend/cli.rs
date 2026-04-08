@@ -43,6 +43,12 @@ pub enum Command {
         /// Produce an obfuscated/garbled output.
         obfuscate: bool,
         #[arg(long)]
+        /// Enable experimental features.
+        experimental: bool,
+        #[arg(long)]
+        /// Obfuscate numbers (e.g. 50 -> 8235 / 164.7).
+        numbers: bool,
+        #[arg(long)]
         /// Debug mode.
         debug: bool,
     },

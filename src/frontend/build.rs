@@ -55,6 +55,8 @@ pub fn build(
     input: Option<PathBuf>,
     output: Option<PathBuf>,
     obfuscate: bool,
+    experimental: bool,
+    numbers: bool,
     debug: bool,
 ) -> anyhow::Result<Artifact> {
     let input = input.unwrap_or_else(|| env::current_dir().unwrap());
@@ -67,8 +69,8 @@ pub fn build(
         BufWriter::new(File::create(&output)?),
         fs.clone(),
         canonical_input.clone(),
-        obfuscate,
-    );
+        obfuscate,        experimental,
+        numbers,    );
     build_impl(fs, canonical_input, sb3, None)
 }
 
@@ -87,6 +89,12 @@ pub fn build_impl<T: Write + Seek>(
         .with_context(|| format!("failed to parse {}", config_path.display()))?;
     if let Some(true) = config.obfuscate {
         sb3.obfuscate = true;
+    }
+    if let Some(true) = config.experimental {
+        sb3.experimental = true;
+    }
+    if let Some(true) = config.numbers {
+        sb3.numbers = true;
     }
     if let Some(true) = config.debug {
         crate::codegen::sb3::DEBUG.store(true, std::sync::atomic::Ordering::Relaxed);
@@ -203,6 +211,11 @@ pub fn build_impl<T: Write + Seek>(
     );
     visitor::pass3::visit_project(&mut project);
     visitor::pass4::visit_project(&mut project);
+    
+    if sb3.obfuscate && (sb3.experimental || sb3.numbers) {
+        visitor::pass5::visit_project(&mut project);
+    }
+    
     log::info!("{:#?}", project);
     sb3.project(
         fs.clone(),
