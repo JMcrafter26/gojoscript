@@ -534,8 +534,9 @@ where T: Write + Seek
             match &arg.type_ {
                 Type::Value => {
                     let arg_id = self.id.new_id();
-                    self.input(s, d, &arg.name, arg_value, arg_id, false)?;
-                    qualified_args.push((arg.name.clone(), arg_id));
+                    let garbled_arg_name: SmolStr = self.garble(&arg.name).into();
+                    self.input(s, d, &garbled_arg_name, arg_value, arg_id, false)?;
+                    qualified_args.push((garbled_arg_name, arg_id));
                     qualified_arg_values.push(arg_value.clone());
                 }
                 Type::Struct {
@@ -579,6 +580,7 @@ where T: Write + Seek
                     };
                     for field in &struct_.fields {
                         let qualified_arg_name = qualify_struct_var_name(&field.name, &arg.name);
+                        let garbled_arg_name: SmolStr = self.garble(&qualified_arg_name).into();
                         let arg_id = self.id.new_id();
                         let field_value = struct_literal_fields
                             .iter()
@@ -594,8 +596,8 @@ where T: Write + Seek
                                 true,
                             ),
                         };
-                        self.input(s, d, &qualified_arg_name, &value, arg_id, false)?;
-                        qualified_args.push((qualified_arg_name, arg_id));
+                        self.input(s, d, &garbled_arg_name, &value, arg_id, false)?;
+                        qualified_args.push((garbled_arg_name, arg_id));
                         if !is_placeholder {
                             qualified_arg_values.push(value);
                         }
@@ -604,10 +606,11 @@ where T: Write + Seek
             }
         }
         self.end_obj()?; // inputs
+        let garbled_proc_name: SmolStr = self.garble(&proc.name).into();
         write!(
             self,
             "{}",
-            Mutation::call(proc.name.clone(), &qualified_args, proc.warp, compact)
+            Mutation::call(garbled_proc_name, &qualified_args, proc.warp, compact)
         )?;
         self.end_obj()?; // node
         for (arg, (_, arg_id)) in qualified_arg_values.iter().zip(qualified_args) {

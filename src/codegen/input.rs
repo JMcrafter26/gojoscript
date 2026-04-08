@@ -155,7 +155,8 @@ where T: Write + Seek
                     })
                     .flatten();
                 if name == "BROADCAST_INPUT" {
-                    write!(self, "[1,[11,{},{}]]", json!(**string), json!(**string))
+                    let garbled_msg = self.garble(string);
+                    write!(self, "[1,[11,{},{}]]", json!(garbled_msg), json!(garbled_msg))
                 } else if let Some(color) = color {
                     write!(self, "[1,[9,{}]]", json!(color.to_css_hex()))
                 } else {
@@ -175,12 +176,14 @@ where T: Write + Seek
     ) -> io::Result<()> {
         match s.qualify_name(Some(d), name) {
             Some(QualifiedName::Var(name, _)) => {
+                let garbled_name = self.garble(&name);
                 self.block_count += 1;
-                write!(self, "[3,[12,{},{}],", json!(*name), json!(*name))?;
+                write!(self, "[3,[12,{},{}],", json!(garbled_name), json!(garbled_name))?;
             }
             Some(QualifiedName::List(name, _)) => {
+                let garbled_name = self.garble(&name);
                 self.block_count += 1;
-                write!(self, "[3,[13,{},{}],", json!(*name), json!(*name))?;
+                write!(self, "[3,[13,{},{}],", json!(garbled_name), json!(garbled_name))?;
             }
             None => {}
         }

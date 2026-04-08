@@ -105,7 +105,7 @@ mod tests {
         }
         let fs = Rc::new(RefCell::new(fs));
         let mut output = Vec::new();
-        let sb3 = Sb3::new(Cursor::new(&mut output), fs.clone(), "project".into());
+        let sb3 = Sb3::new(Cursor::new(&mut output), fs.clone(), "project".into(), false);
         let stdlib = StandardLibrary {
             path: "stdlib".into(),
             version: Version::new(0, 0, 0),
@@ -123,7 +123,7 @@ mod tests {
         }
         let fs = Rc::new(RefCell::new(fs));
         let mut output = Vec::new();
-        let sb3 = Sb3::new(Cursor::new(&mut output), fs.clone(), "project".into());
+        let sb3 = Sb3::new(Cursor::new(&mut output), fs.clone(), "project".into(), false);
         let stdlib = StandardLibrary {
             path: "stdlib".into(),
             version: Version::new(0, 0, 0),

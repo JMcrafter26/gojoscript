@@ -39,6 +39,9 @@ pub enum Command {
         #[arg(short, long)]
         /// Output file, if not given, it will be the project directory's name + `.sb3`
         output: Option<PathBuf>,
+        #[arg(long)]
+        /// Produce an obfuscated/garbled output.
+        obfuscate: bool,
     },
 
     /// Create a new goboscript project with a blank backdrop, a main sprite with a

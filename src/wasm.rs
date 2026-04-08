@@ -41,7 +41,7 @@ pub fn build(fs: JsValue) -> JsValue {
     let fs: MemFS = serde_wasm_bindgen::from_value(fs).unwrap();
     let fs = Rc::new(RefCell::new(fs));
     let mut file = Vec::new();
-    let sb3 = Sb3::new(Cursor::new(&mut file), fs.clone(), "project".into());
+    let sb3 = Sb3::new(Cursor::new(&mut file), fs.clone(), "project".into(), false);
     let stdlib = StandardLibrary {
         path: "stdlib".into(),
         version: Version::new(0, 0, 0),

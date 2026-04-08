@@ -331,6 +331,9 @@ where T: Write + Seek
     pub inputs_comma: bool,
     pub block_count: usize,
     pub asset_object_store: AssetObjectStore,
+    pub obfuscate: bool,
+    garbled_vars: FxHashMap<String, String>,
+    garbler_count: usize,
 }
 
 impl<T> Write for Sb3<T>
@@ -348,7 +351,7 @@ where T: Write + Seek
 impl<T> Sb3<T>
 where T: Write + Seek
 {
-    pub fn new(file: T, fs: Rc<RefCell<dyn VFS>>, input: PathBuf) -> Self {
+    pub fn new(file: T, fs: Rc<RefCell<dyn VFS>>, input: PathBuf, obfuscate: bool) -> Self {
         Self {
             zip: ZipWriter::new(file),
             id: NodeIDFactory::new(),
@@ -356,7 +359,23 @@ where T: Write + Seek
             inputs_comma: false,
             block_count: 0,
             asset_object_store: AssetObjectStore::new(input, fs),
+            obfuscate,
+            garbled_vars: Default::default(),
+            garbler_count: 0,
         }
+    }
+
+    pub fn garble(&mut self, name: &str) -> String {
+        if !self.obfuscate {
+            return name.to_string();
+        }
+        if let Some(n) = self.garbled_vars.get(name) {
+            return n.clone();
+        }
+        self.garbler_count += 1;
+        let new_name = format!("_{}", self.garbler_count);
+        self.garbled_vars.insert(name.to_string(), new_name.clone());
+        new_name
     }
 
     pub fn begin_node(&mut self, node: Node) -> io::Result<()> {
@@ -569,7 +588,8 @@ where T: Write + Seek
             let mut comma = false;
             for broadcast in broadcasts {
                 write_comma_io(&mut self.zip, &mut comma)?;
-                write!(self, r#"{}:{}"#, json!(**broadcast), json!(**broadcast))?;
+                let garbled_msg = self.garble(&**broadcast);
+                write!(self, r#"{}:{}"#, json!(garbled_msg), json!(garbled_msg))?;
             }
         }
         write!(self, "}}")?; // broadcasts
@@ -754,21 +774,22 @@ where T: Write + Seek
         comma: &mut bool,
     ) -> io::Result<()> {
         write_comma_io(&mut self.zip, comma)?;
+        let garbled_name = self.garble(var_name);
         let default = default.unwrap_or(Value::from(0.0));
         if is_cloud {
             write!(
                 self,
                 "\"{}\":[\"\u{2601} {}\",{},true]",
-                var_name,
-                var_name,
+                garbled_name,
+                garbled_name,
                 json!(default)
             )
         } else {
             write!(
                 self,
                 "\"{}\":[\"{}\",{}]",
-                var_name,
-                var_name,
+                garbled_name,
+                garbled_name,
                 json!(default)
             )
         }
@@ -920,8 +941,15 @@ where T: Write + Seek
         };
         match &list.type_ {
             Type::Value => {
+                let garbled_name = self.garble(&list.name);
                 write_comma_io(&mut self.zip, comma)?;
-                write!(self, r#""{}":["{}",{}]"#, list.name, list.name, json!(data))?;
+                write!(
+                    self,
+                    r#""{}":["{}",{}]"#,
+                    garbled_name,
+                    garbled_name,
+                    json!(data)
+                )?;
             }
             Type::Struct {
                 name: type_name,
@@ -936,6 +964,7 @@ where T: Write + Seek
                 };
                 for (i, field) in struct_.fields.iter().enumerate() {
                     let qualified_list_name = qualify_struct_var_name(&field.name, &list.name);
+                    let garbled_name = self.garble(&qualified_list_name);
                     write_comma_io(&mut self.zip, comma)?;
                     let column = (0..(data.len() / struct_.fields.len()))
                         .map(|j| &data[j * struct_.fields.len() + i])
@@ -943,8 +972,8 @@ where T: Write + Seek
                     write!(
                         self,
                         r#""{}":["{}",{}]"#,
-                        qualified_list_name,
-                        qualified_list_name,
+                        garbled_name,
+                        garbled_name,
                         json!(column)
                     )?;
                 }
@@ -971,14 +1000,15 @@ where T: Write + Seek
             match &arg.type_ {
                 Type::Value => {
                     let arg_id = self.id.new_id();
+                    let garbled_arg_name: SmolStr = self.garble(&arg.name).into();
                     self.begin_node(
                         Node::new("argument_reporter_string_number", arg_id)
                             .parent_id(prototype_id)
                             .shadow(true),
                     )?;
-                    self.single_field("VALUE", &arg.name)?;
+                    self.single_field("VALUE", &garbled_arg_name)?;
                     self.end_obj()?; // node
-                    qualified_args.push((arg.name.clone(), arg_id));
+                    qualified_args.push((garbled_arg_name, arg_id));
                 }
                 Type::Struct {
                     name: type_name,
@@ -993,15 +1023,16 @@ where T: Write + Seek
                     };
                     for field in &struct_.fields {
                         let qualified_arg_name = qualify_struct_var_name(&field.name, &arg.name);
+                        let garbled_arg_name: SmolStr = self.garble(&qualified_arg_name).into();
                         let arg_id = self.id.new_id();
                         self.begin_node(
                             Node::new("argument_reporter_string_number", arg_id)
                                 .parent_id(prototype_id)
                                 .shadow(true),
                         )?;
-                        self.single_field("VALUE", &qualified_arg_name)?;
+                        self.single_field("VALUE", &garbled_arg_name)?;
                         self.end_obj()?; // node
-                        qualified_args.push((qualified_arg_name, arg_id));
+                        qualified_args.push((garbled_arg_name, arg_id));
                     }
                 }
             }
@@ -1018,10 +1049,11 @@ where T: Write + Seek
             write!(self, r#"{}:[2,{arg_id}]"#, json!(**qualified_arg_name))?;
         }
         self.end_obj()?; // inputs
+        let garbled_proc_name: SmolStr = self.garble(&proc.name).into();
         write!(
             self,
             "{}",
-            Mutation::prototype(proc.name.clone(), &qualified_args, proc.warp, false)
+            Mutation::prototype(garbled_proc_name, &qualified_args, proc.warp, false)
         )?;
         self.end_obj()?; // node
         self.stmts(s, d, definition, next_id, Some(this_id))
@@ -1045,14 +1077,15 @@ where T: Write + Seek
             match &arg.type_ {
                 Type::Value => {
                     let arg_id = self.id.new_id();
+                    let garbled_arg_name: SmolStr = self.garble(&arg.name).into();
                     self.begin_node(
                         Node::new("argument_reporter_string_number", arg_id)
                             .parent_id(prototype_id)
                             .shadow(true),
                     )?;
-                    self.single_field("VALUE", &arg.name)?;
+                    self.single_field("VALUE", &garbled_arg_name)?;
                     self.end_obj()?; // node
-                    qualified_args.push((arg.name.clone(), arg_id));
+                    qualified_args.push((garbled_arg_name, arg_id));
                 }
                 Type::Struct {
                     name: type_name,
@@ -1067,15 +1100,16 @@ where T: Write + Seek
                     };
                     for field in &struct_.fields {
                         let qualified_arg_name = qualify_struct_var_name(&field.name, &arg.name);
+                        let garbled_arg_name: SmolStr = self.garble(&qualified_arg_name).into();
                         let arg_id = self.id.new_id();
                         self.begin_node(
                             Node::new("argument_reporter_string_number", arg_id)
                                 .parent_id(prototype_id)
                                 .shadow(true),
                         )?;
-                        self.single_field("VALUE", &qualified_arg_name)?;
+                        self.single_field("VALUE", &garbled_arg_name)?;
                         self.end_obj()?; // node
-                        qualified_args.push((qualified_arg_name, arg_id));
+                        qualified_args.push((garbled_arg_name, arg_id));
                     }
                 }
             }
@@ -1092,10 +1126,11 @@ where T: Write + Seek
             write!(self, r#"{}:[2,{arg_id}]"#, json!(**qualified_arg_name))?;
         }
         self.end_obj()?; // inputs
+        let garbled_func_name: SmolStr = self.garble(&func.name).into();
         write!(
             self,
             "{}",
-            Mutation::prototype(func.name.clone(), &qualified_args, true, false)
+            Mutation::prototype(garbled_func_name, &qualified_args, true, false)
         )?;
         self.end_obj()?; // node
         self.stmts(s, d, definition, next_id, Some(this_id))

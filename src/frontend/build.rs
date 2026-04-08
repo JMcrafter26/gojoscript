@@ -51,16 +51,21 @@ use crate::{
     visitor,
 };
 
-pub fn build(input: Option<PathBuf>, output: Option<PathBuf>) -> anyhow::Result<Artifact> {
+pub fn build(
+    input: Option<PathBuf>,
+    output: Option<PathBuf>,
+    obfuscate: bool,
+) -> anyhow::Result<Artifact> {
     let input = input.unwrap_or_else(|| env::current_dir().unwrap());
     let canonical_input = input.canonicalize()?;
     let project_name = canonical_input.file_name().unwrap().to_str().unwrap();
     let output = output.unwrap_or_else(|| input.join(format!("{project_name}.sb3")));
     let fs = Rc::new(RefCell::new(RealFS));
-    let sb3 = Sb3::new(
+    let mut sb3 = Sb3::new(
         BufWriter::new(File::create(&output)?),
         fs.clone(),
         canonical_input.clone(),
+        obfuscate,
     );
     build_impl(fs, canonical_input, sb3, None)
 }
@@ -78,6 +83,9 @@ pub fn build_impl<T: Write + Seek>(
         .unwrap_or_default();
     let config: Config = toml::from_str(&config_src)
         .with_context(|| format!("failed to parse {}", config_path.display()))?;
+    if let Some(true) = config.obfuscate {
+        sb3.obfuscate = true;
+    }
     let stdlib = if let Some(stdlib) = stdlib {
         stdlib
     } else if let Some(std) = &config.std {

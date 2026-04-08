@@ -23,7 +23,8 @@ impl<T> Sb3<T>
 where T: Write + Seek
 {
     pub fn on(&mut self, event: &SmolStr) -> io::Result<()> {
-        self.single_field_id("BROADCAST_OPTION", event)?;
+        let garbled_event = self.garble(event);
+        self.single_field_id("BROADCAST_OPTION", &garbled_event)?;
         self.end_obj() // node
     }
 
