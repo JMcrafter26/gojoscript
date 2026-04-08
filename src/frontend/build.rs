@@ -88,6 +88,9 @@ pub fn build_impl<T: Write + Seek>(
     if let Some(true) = config.obfuscate {
         sb3.obfuscate = true;
     }
+    if let Some(true) = config.debug {
+        crate::codegen::sb3::DEBUG.store(true, std::sync::atomic::Ordering::Relaxed);
+    }
     let stdlib = if let Some(stdlib) = stdlib {
         stdlib
     } else if let Some(std) = &config.std {

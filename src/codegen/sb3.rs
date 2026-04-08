@@ -374,7 +374,7 @@ where T: Write + Seek
         if let Some(rest) = name.strip_prefix("__") {
             return rest.to_string();
         }
-        if DEBUG.load(std::sync::atomic::Ordering::Relaxed) && ["log", "warn", "error", "breakpoint"].contains(&name) {
+        if DEBUG.load(std::sync::atomic::Ordering::Relaxed) && ["log", "warn", "error", "breakpoint", "\u{200b}\u{200b}log\u{200b}\u{200b}", "\u{200b}\u{200b}warn\u{200b}\u{200b}", "\u{200b}\u{200b}error\u{200b}\u{200b}", "\u{200b}\u{200b}breakpoint\u{200b}\u{200b}"].contains(&name) {
             return name.to_string();
         }
         if let Some(n) = self.garbled_vars.get(name) {
